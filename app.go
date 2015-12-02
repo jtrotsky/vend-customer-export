@@ -13,12 +13,11 @@ import (
 var (
 	domainPrefix string
 	token        string
-	tz           string
 )
 
 func main() {
 	// Third argument is timezone, not useful here.
-	v := vend.NewClient(token, domainPrefix, tz)
+	v := vend.NewClient(token, domainPrefix, "")
 	manager := NewManager(v)
 
 	manager.Run()
