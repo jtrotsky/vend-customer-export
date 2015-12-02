@@ -3,5 +3,6 @@
 *.csv
 *.log
 *.txt
+*.zip
 
 vend-customer-export
