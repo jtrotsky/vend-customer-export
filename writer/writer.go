@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/jtrotsky/govend/vend"
+	"github.com/jtrotsky/gov/vend"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -35,6 +35,12 @@ func WriteFile(customers []vend.Customer, domainPrefix string) error {
 	var header []string
 	header = append(header, "id")
 	header = append(header, "customer_code")
+	header = append(header, "first_name")
+	header = append(header, "last_name")
+	header = append(header, "email")
+	header = append(header, "note")
+	header = append(header, "company_name")
+	header = append(header, "mobile")
 	header = append(header, "deleted_at")
 
 	// Commit the header.
@@ -44,12 +50,31 @@ func WriteFile(customers []vend.Customer, domainPrefix string) error {
 	for _, customer := range customers {
 
 		var deletedAt time.Time
-		var id, code, deletedAtStr string
+		var id, code, firstName, lastName, email, note, companyName,
+			mobile, deletedAtStr string
 		if customer.ID != nil {
 			id = *customer.ID
 		}
 		if customer.Code != nil {
 			code = *customer.Code
+		}
+		if customer.FirstName != nil {
+			firstName = *customer.FirstName
+		}
+		if customer.LastName != nil {
+			lastName = *customer.LastName
+		}
+		if customer.Email != nil {
+			email = *customer.Email
+		}
+		if customer.Note != nil {
+			note = *customer.Note
+		}
+		if customer.CompanyName != nil {
+			companyName = *customer.CompanyName
+		}
+		if customer.Mobile != nil {
+			mobile = *customer.Mobile
 		}
 		if customer.DeletedAt != nil {
 			deletedAt = *customer.DeletedAt
@@ -59,6 +84,12 @@ func WriteFile(customers []vend.Customer, domainPrefix string) error {
 		var record []string
 		record = append(record, id)
 		record = append(record, code)
+		record = append(record, firstName)
+		record = append(record, lastName)
+		record = append(record, email)
+		record = append(record, note)
+		record = append(record, companyName)
+		record = append(record, mobile)
 		record = append(record, deletedAtStr)
 		writer.Write(record)
 	}
